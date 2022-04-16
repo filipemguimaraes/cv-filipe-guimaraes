@@ -1,0 +1,53 @@
+<p>curriculum works!</p>
+
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body"
+       *ngIf="curriculums$ | async as curriculums">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <select class="form-control">
+            <option value="0">- Display All -</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="onAdd()">Add CV</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table mb-0"
+             *ngIf="curriculums">
+        <thead>
+        <tr>
+          <th>Category</th>
+          <th>School Name</th>
+          <th>Curse Name</th>
+          <th>City</th>
+          <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let curriculum of curriculums">
+        <tr>
+          <td>{{ curriculum.category }}</td>
+          <td>{{ curriculum.id }}</td>
+          <td>{{ curriculum.id }}</td>
+          <td>{{ curriculum.id  }}</td>
+          <td>{{ curriculum.id }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-warning" (click)="detailCV(curriculum.id)">Detail</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

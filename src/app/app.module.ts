@@ -3,14 +3,29 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CurriculumComponent } from './curriculum/curriculum.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AppData } from './app-data';
+import { HttpClientModule } from '@angular/common/http';
+import { OnlineCoursesComponent } from './online-courses/online-courses.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ToolbarComponent,
+    CurriculumComponent,
+    OnlineCoursesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
+    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),
   ],
   providers: [],
   bootstrap: [AppComponent]
