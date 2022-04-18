@@ -1,37 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { CurriculumService } from './curriculum.service';
-import { Observable } from 'rxjs';
-import { Curriculum } from './curriculum-data';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from 'rxjs';
 
 @Component({
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',
   styleUrls: ['./curriculum.component.css']
 })
-export class CurriculumComponent implements OnInit {
+export class CurriculumComponent {
 
-  pageTitle = 'Curriculum Vitae';
+  pageTitle = 'Curriculum Vitae - most important';
+  selectedOption = 'All';
 
-  curriculums$: Observable<Curriculum[]> = this.curriculumService.getCurriculums();
+  private categorySelectedSubject = new BehaviorSubject<string>('All');
+  categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+
+  curriculums$ = combineLatest([
+    this.curriculumService.getCurriculums(),
+    this.categorySelectedAction$
+  ])
+    .pipe(
+      map(([cvs, selectedCategory]) =>
+        cvs.filter(cv =>
+          selectedCategory !== 'All' ? cv.category === selectedCategory : true
+        ))
+    )
 
   constructor(private curriculumService: CurriculumService) { }
 
-  ngOnInit(): void {
-  }
-
-  onSelected(value: any) {
-
+  onSelected() {
+    this.categorySelectedSubject.next(this.selectedOption);
   }
 
   onAdd() {
-
-  }
-
-  detailCV(id: number) {
-
-  }
-
-  deleteCv(id: number) {
+    console.log('TODO');
   }
 
 }
