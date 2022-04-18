@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CurriculumService } from './curriculum.service';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-curriculum',
@@ -9,7 +9,7 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from 'rxjs';
 })
 export class CurriculumComponent {
 
-  pageTitle = 'Curriculum Vitae - most important';
+  pageTitle = 'Curriculum Vitae - most relevant';
   selectedOption = 'All';
 
   private categorySelectedSubject = new BehaviorSubject<string>('All');
@@ -30,10 +30,6 @@ export class CurriculumComponent {
 
   onSelected() {
     this.categorySelectedSubject.next(this.selectedOption);
-  }
-
-  onAdd() {
-    console.log('TODO');
   }
 
 }
